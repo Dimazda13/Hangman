@@ -34,7 +34,7 @@ using namespace std;
 const int MAX_WRONGS = 8;
 
 int greeting() {
-    cout << "Welcome to HANGMAN";
+    cout << "Welcome to HANGMAN. Good luck\n\n";
     return 0;
 }
 
@@ -90,8 +90,10 @@ string replace(string soFar, string word, char guess) {
 int winner(string word, string soFar) {
     if (word == soFar) {
         cout << "\n\nYou guessed right.\n";
+        cout << "You win\n";
     }
     else {
+        cout << "\nYou have been hanged!\n";
         cout << "You lose\n";
     }
     cout << "The hidden word is: " << word;
@@ -101,19 +103,21 @@ int winner(string word, string soFar) {
 int main() {
     string word = words();
     string soFar(word.size(), '-');
-    cout << word << "\n";
-    cout << soFar << "\n";
     string used = "";
-    int worngs = 0;
+    int wrongs = 0;
 
-    while (soFar != word && worngs != MAX_WRONGS) {
+    while (soFar != word && wrongs != MAX_WRONGS) {
+        cout << "\n\nYou have " << (MAX_WRONGS - wrongs) << " incorrect guesses left\n";
+        cout << "\nYou have used the following letters:\n" << used << endl;
+        cout << "\nSo far. the word is\n" << soFar << endl;
+
         char chararcter = player(used);
         if (check(chararcter, word)) {
             soFar = replace(soFar, word, chararcter);
-            
+            cout << "That`s right! " << chararcter << " is in the word\n";
         } else {
-            cout << "" << "\n";
-            worngs ++;
+            cout << "Sorry " << chararcter << " isn`t in the word";
+            wrongs ++;
         }
         used += chararcter;
     }

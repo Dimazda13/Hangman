@@ -24,12 +24,14 @@ using namespace std;
             Увеличить количество ошибок
             Добавить букву в словарь
             спросить букву
-    Проверить на выгирыш
+    Проверить на выгирыш +
         Если слово угалано
             победа
         иначе
             проигрыш
 */
+
+const int MAX_WRONGS = 8;
 
 int greeting() {
     cout << "Welcome to HANGMAN";
@@ -51,11 +53,17 @@ string words() {
     return WORD;
 }
 
-char player() {
+char player(string used) {
     char player_guess = ' ';
     cout << "Enter a guess: ";
     cin >> player_guess;
     player_guess = toupper(player_guess);
+    while (used.find(player_guess) != string::npos) {
+        cout << "\nYou have allready guessed " << player_guess;
+        cout << "\n\nEnter your guess: ";
+        cin >> player_guess;
+        player_guess = toupper(player_guess);
+    } 
     return player_guess;
 }
 
@@ -81,10 +89,10 @@ string replace(string soFar, string word, char guess) {
 
 int winner(string word, string soFar) {
     if (word == soFar) {
-        cout << "You guessed right.";
+        cout << "\n\nYou guessed right.\n";
     }
     else {
-        cout << "You lose";
+        cout << "You lose\n";
     }
     cout << "The hidden word is: " << word;
     return 0;
@@ -96,15 +104,18 @@ int main() {
     cout << word << "\n";
     cout << soFar << "\n";
     string used = "";
+    int worngs = 0;
 
-    while (soFar != word) {
-        char chararcter = player();
+    while (soFar != word && worngs != MAX_WRONGS) {
+        char chararcter = player(used);
         if (check(chararcter, word)) {
             soFar = replace(soFar, word, chararcter);
-            cout << soFar;
+            
         } else {
-            cout << "no much" << "\n";
+            cout << "" << "\n";
+            worngs ++;
         }
+        used += chararcter;
     }
     winner(word, soFar);
 }

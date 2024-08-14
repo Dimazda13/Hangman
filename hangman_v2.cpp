@@ -79,6 +79,17 @@ string replace(string soFar, string word, char guess) {
     return soFar;
 }
 
+int winner(string word, string soFar) {
+    if (word == soFar) {
+        cout << "You guessed right.";
+    }
+    else {
+        cout << "You lose";
+    }
+    cout << "The hidden word is: " << word;
+    return 0;
+}
+
 int main() {
     string word = words();
     string soFar(word.size(), '-');
@@ -95,4 +106,5 @@ int main() {
             cout << "no much" << "\n";
         }
     }
+    winner(word, soFar);
 }

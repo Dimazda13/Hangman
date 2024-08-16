@@ -7,30 +7,6 @@
 
 using namespace std;
 
-/*
-    Приветствие +
-    Загадать слово +
-        Составить слова в вектора +
-        Перемешать словаа в векторе +
-        Выбрать случайное слово +
-        Скрыть слово +
-    Спросить букву +
-    Проверить букву в слове +
-        Если догадка верна +
-            открыть букву +
-        Иначе если буква уже спрашивалась
-            спросить букву
-        Иначе
-            Увеличить количество ошибок
-            Добавить букву в словарь
-            спросить букву
-    Проверить на выгирыш +
-        Если слово угалано
-            победа
-        иначе
-            проигрыш
-*/
-
 const int MAX_WRONGS = 8;
 
 int greeting() {
@@ -44,6 +20,9 @@ string words() {
     words.push_back("HANGMAN");
     words.push_back("DIFFICULT");
     words.push_back("ANSWER");
+    words.push_back("ENTER");
+    words.push_back("CHAPTER");
+    words.push_back("USER");
 
     srand(time(0));
     random_shuffle(words.begin(), words.end());
